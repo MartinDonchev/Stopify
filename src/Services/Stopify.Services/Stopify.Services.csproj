@@ -18,4 +18,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Stopify.Services.Models\Stopify.Services.Models.csproj" />
+    <ProjectReference Include="..\..\Stopify.Web.InputModels\Stopify.Web.InputModels.csproj" />
+  </ItemGroup>
+
 </Project>

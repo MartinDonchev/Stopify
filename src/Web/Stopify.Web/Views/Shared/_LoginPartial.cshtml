@@ -1,8 +1,8 @@
 ﻿@using Stopify.Common
 @using Stopify.Data.Models
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<StopifyUser> SignInManager
+@inject UserManager<StopifyUser> UserManager
 
 <ul class="navbar-nav">
     @if (this.SignInManager.IsSignedIn(this.User))
