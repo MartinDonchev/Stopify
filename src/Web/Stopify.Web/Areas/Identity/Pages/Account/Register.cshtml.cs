@@ -45,7 +45,6 @@ namespace Stopify.Web.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
             [Display(Name = "Username")]
             public string UserName { get; set; }
 
@@ -74,18 +73,18 @@ namespace Stopify.Web.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/Identity/Account/Login");
             if (ModelState.IsValid)
             {
-                var isRoot = _userManager.Users.Any();
+                var isRoot = !_userManager.Users.Any();
                 var user = new StopifyUser { UserName = Input.UserName, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     if (isRoot)
                     {
-                        _userManager.AddToRoleAsync(user, "Admin");
+                        await _userManager.AddToRoleAsync(user, "Admin");
                     }
                     else
                     {
-                        _userManager.AddToRoleAsync(user, "User");
+                        await _userManager.AddToRoleAsync(user, "User");
                     }
                     _logger.LogInformation("User created a new account with password.");
 

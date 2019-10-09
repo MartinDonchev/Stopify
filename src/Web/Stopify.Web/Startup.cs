@@ -1,7 +1,6 @@
 ﻿namespace Stopify.Web
 {
     using System.Reflection;
-
     using Stopify.Data;
     using Stopify.Data.Common;
     using Stopify.Data.Common.Repositories;
@@ -26,7 +25,7 @@
     using Microsoft.Extensions.Logging;
     using System.Threading.Tasks;
     using System.Linq;
-    using Stopify.Data.Models;
+    
 
     public class Startup
     {
@@ -116,17 +115,21 @@
                 {
                     context.Database.EnsureCreated();
 
-                    if (context.Roles.Any())
+                    if (!context.Roles.Any())
                     {
                         context.Roles.Add(new ApplicationRole
                         {
-                            Name = "Admin"
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         });
 
                         context.Roles.Add(new ApplicationRole
                         {
-                            Name = "User"
+                            Name = "User",
+                            NormalizedName = "USER"
                         });
+
+                        context.SaveChanges();
                     }
                 }
 
