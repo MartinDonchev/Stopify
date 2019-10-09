@@ -17,10 +17,10 @@
     public class LoginWithRecoveryCodeModel : PageModel
 #pragma warning restore SA1649 // File name should match first type name
     {
-        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly SignInManager<StopifyUser> signInManager;
         private readonly ILogger<LoginWithRecoveryCodeModel> logger;
 
-        public LoginWithRecoveryCodeModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginWithRecoveryCodeModel> logger)
+        public LoginWithRecoveryCodeModel(SignInManager<StopifyUser> signInManager, ILogger<LoginWithRecoveryCodeModel> logger)
         {
             this.signInManager = signInManager;
             this.logger = logger;

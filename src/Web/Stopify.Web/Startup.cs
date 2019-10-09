@@ -5,9 +5,9 @@
     using Stopify.Data;
     using Stopify.Data.Common;
     using Stopify.Data.Common.Repositories;
-    using Stopify.Data.Models;
     using Stopify.Data.Repositories;
     using Stopify.Data.Seeding;
+    using Stopify.Data.Models;
     using Stopify.Services.Data;
     using Stopify.Services.Mapping;
     using Stopify.Services.Messaging;
@@ -24,6 +24,9 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using System.Threading.Tasks;
+    using System.Linq;
+    using Stopify.Data.Models;
 
     public class Startup
     {
@@ -109,14 +112,25 @@
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<StopifyDbContext>();
-
-                if (env.IsDevelopment())
+                using (var context = serviceScope.ServiceProvider.GetRequiredService<StopifyDbContext>())
                 {
-                    dbContext.Database.Migrate();
+                    context.Database.EnsureCreated();
+
+                    if (context.Roles.Any())
+                    {
+                        context.Roles.Add(new ApplicationRole
+                        {
+                            Name = "Admin"
+                        });
+
+                        context.Roles.Add(new ApplicationRole
+                        {
+                            Name = "User"
+                        });
+                    }
                 }
 
-                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+               // new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
             if (env.IsDevelopment())
@@ -129,6 +143,8 @@
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
