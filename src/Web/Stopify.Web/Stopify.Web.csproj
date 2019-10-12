@@ -34,6 +34,7 @@
     <ProjectReference Include="..\..\Services\Stopify.Services.Mapping\Stopify.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\Stopify.Services.Messaging\Stopify.Services.Messaging.csproj" />
     <ProjectReference Include="..\..\Services\Stopify.Services.Models1\Stopify.Services.Models.csproj" />
+    <ProjectReference Include="..\..\Services\Stopify.Services1\Stopify.Services.csproj" />
     <ProjectReference Include="..\..\Stopify.Web.InputModels\Stopify.Web.InputModels.csproj" />
     <ProjectReference Include="..\Stopify.Web.Infrastructure\Stopify.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Stopify.Web.ViewModels\Stopify.Web.ViewModels.csproj" />

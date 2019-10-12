@@ -25,7 +25,7 @@
     using Microsoft.Extensions.Logging;
     using System.Threading.Tasks;
     using System.Linq;
-    
+    using Stopify.Services;
 
     public class Startup
     {
@@ -52,12 +52,16 @@
                     options.Password.RequireUppercase = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequiredLength = 6;
+
+                    options.User.RequireUniqueEmail = true;
                 })
                 .AddEntityFrameworkStores<StopifyDbContext>()
                 .AddUserStore<ApplicationUserStore>()
                 .AddRoleStore<ApplicationRoleStore>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI(UIFramework.Bootstrap4);
+
+            services.AddTransient<IProductService, ProductService>();
 
             services
                 .AddMvc()

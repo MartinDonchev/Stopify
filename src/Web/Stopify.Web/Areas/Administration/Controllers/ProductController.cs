@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Stopify.Services;
 using Stopify.Services.Models;
 using Stopify.Web.InputModels;
 
@@ -10,22 +11,31 @@ namespace Stopify.Web.Areas.Administration.Controllers
 {
     public class ProductController : AdminController
     {
+        private readonly IProductService productService;
+
+        public ProductController(IProductService productService)
+        {
+            this.productService = productService;
+        }
+
         [HttpGet]
-        [Route("/Type/Create")]
+        [Route("/Administration/Product/Type/Create")]
         public async Task<IActionResult> CreateType()
         {
             return this.View("Type/Create");
         }
 
-        [HttpPost]
-        [Route("/Type/Create")]
+        [HttpPost("/Administration/Product/Type/Create")]
+        [Route("Type/Create")]
         public async Task<IActionResult> CreateType(ProductTypeCreateInputModel
             productTypeCreateInputModel)
         {
             ProductTypeServiceModel productTypeServiceModel = new ProductTypeServiceModel
             {
-                Name = productTypeCreateInputModel.Name
+                Name = productTypeCreateInputModel.Name,
             };
+
+            await this.productService.CreateProductType(productTypeServiceModel);
 
             return this.Redirect("/");
         }
@@ -50,6 +60,9 @@ namespace Stopify.Web.Areas.Administration.Controllers
                     Name = productCreateInputModel.ProductType
                 },
             };
+
+            await this.productService.Create(productServiceModel);
+
             return this.Redirect("/");
 
         }
