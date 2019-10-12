@@ -36,8 +36,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Services\Stopify.Services.Messaging\Stopify.Services.Messaging.csproj" />
     <ProjectReference Include="..\..\Stopify.Common\Stopify.Common.csproj" />
-    <ProjectReference Include="..\Stopify.Data.Common\Stopify.Data.Common.csproj" />
     <ProjectReference Include="..\Stopify.Data.Models\Stopify.Data.Models.csproj" />
   </ItemGroup>
 

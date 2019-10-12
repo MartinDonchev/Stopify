@@ -8,8 +8,28 @@ using Stopify.Web.InputModels;
 
 namespace Stopify.Web.Areas.Administration.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : AdminController
     {
+        [HttpGet]
+        [Route("/Type/Create")]
+        public async Task<IActionResult> CreateType()
+        {
+            return this.View("Type/Create");
+        }
+
+        [HttpPost]
+        [Route("/Type/Create")]
+        public async Task<IActionResult> CreateType(ProductTypeCreateInputModel
+            productTypeCreateInputModel)
+        {
+            ProductTypeServiceModel productTypeServiceModel = new ProductTypeServiceModel
+            {
+                Name = productTypeCreateInputModel.Name
+            };
+
+            return this.Redirect("/");
+        }
+
         [HttpGet(Name = "Create")]
         public async Task<IActionResult> Create()
         {
@@ -28,7 +48,7 @@ namespace Stopify.Web.Areas.Administration.Controllers
                 ProductType = new ProductTypeServiceModel
                 {
                     Name = productCreateInputModel.ProductType
-                }
+                },
             };
             return this.Redirect("/");
 

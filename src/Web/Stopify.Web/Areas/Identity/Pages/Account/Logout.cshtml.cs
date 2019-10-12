@@ -15,30 +15,20 @@ namespace Stopify.Web.Areas.Identity.Pages.Account
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<StopifyUser> _signInManager;
-        private readonly ILogger<LogoutModel> _logger;
+        //private readonly ILogger<LogoutModel> _logger;
 
-        public LogoutModel(SignInManager<StopifyUser> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(SignInManager<StopifyUser> signInManager)//, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
-            _logger = logger;
+           // _logger = logger;
         }
 
-        public void OnGet()
-        {
-        }
-
-        public async Task<IActionResult> OnPost(string returnUrl = null)
+        public async Task<IActionResult> OnGet()
         {
             await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
-            if (returnUrl != null)
-            {
-                return LocalRedirect(returnUrl);
-            }
-            else
-            {
-                return Page();
-            }
+
+             return Redirect("/Identity/Account/Login");
         }
+
     }
 }

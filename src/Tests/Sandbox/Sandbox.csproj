@@ -39,7 +39,6 @@
     <ProjectReference Include="..\..\Services\Stopify.Services.Data\Stopify.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\Stopify.Services.Mapping\Stopify.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\Stopify.Services.Messaging\Stopify.Services.Messaging.csproj" />
-    <ProjectReference Include="..\..\Services\Stopify.Services\Stopify.Services.csproj" />
   </ItemGroup>
 
 </Project>
